@@ -7,18 +7,18 @@ const NavBar = () => {
         <div className={style.NavBar}>
              <nav className={style.navBarDisplay}>
             <div className={style.navBarElements}>
-                <NavLink to="/" className=""><img src={home} alt="" className={style.imgHome}/></NavLink>
+                <NavLink to="/" className={style.NavLink}><img src={home} alt="" className={style.imgHome}/></NavLink>
               
                 <div className={style.navBarOptions}>
                     <ul className="navbar-nav">
                         <li className="nav-item">
-                            <NavLink to="/" className="nav-link active">Home</NavLink>
+                            <NavLink to="/" className={style.NavLink}>Home</NavLink>
                         </li>
                         <li className="nav-item">
-                            <NavLink to="/teams" className="nav-link">Teams</NavLink>
+                            <NavLink to="/teams" className={style.NavLink}>Teams</NavLink>
                         </li>
                         <li className="nav-item">
-                            <NavLink to="/favorites" className="nav-link">Favorites</NavLink>
+                            <NavLink to="/favorites" className={style.NavLink}>Favorites</NavLink>
                         </li>
                     </ul>
                 </div>

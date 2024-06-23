@@ -13,8 +13,8 @@ const Home = () => {
             Imaginate poder armar dos equipos de 5 jugadores cada uno, en donde no tengas ninguna limitación...
             posición, presupuesto, contrato, club, edad... tu mente es tu límite.
         </p>
-        <p>En ATC Dream Match, podrás armar tus equipos soñados y crear
-            <span>El partido de tus sueños.</span>
+        <p>En ATC Dream Match, podrás armar tus equipos soñados y crear 
+            <span> El partido de tus sueños.</span>
         </p>
         </div>
        

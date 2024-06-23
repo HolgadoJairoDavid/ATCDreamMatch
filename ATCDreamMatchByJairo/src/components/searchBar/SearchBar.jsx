@@ -1,6 +1,8 @@
+import style from './searchBar.module.css';
+
 const SearchBar = () => {
     return (
-        <div>
+        <div className={style.SearchBar}>
         <input
             type="text"
             placeholder="Search"
