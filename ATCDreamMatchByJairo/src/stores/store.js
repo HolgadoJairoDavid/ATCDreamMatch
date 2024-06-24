@@ -1,10 +1,10 @@
 import {create} from 'zustand';
 
 const useTeamsStore = create((set) => ({
-    bears: 23,
-    increasePopulation: () => set((state) => ({ bears: state.bears + 1 })),
-    removeAllBears: () => set({ bears: 0 }),
-    updateBears: (newBears) => set({ bears: newBears }),
+    teams: [],
+    setTeams: (teams) => set({ teams: teams }),
+    removeAllTeams: () => set({ teams: [] }),
+    addTeam: (team) => set((state) => ({ teams: [...state.teams, team] })),
   }))
 
 export default useTeamsStore;
