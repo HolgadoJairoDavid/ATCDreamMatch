@@ -32,6 +32,7 @@
     height: 50vh;
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 1000;
+    padding-bottom: 1rem;
 }
 
 .AddTeamModal form {
@@ -59,6 +60,14 @@
     cursor: pointer;
 }
 
+.AddTeamModal p {
+    position: relative;
+    font-size: 1rem;
+    color: #ff4f4f;
+    font-weight: bold;
+
+}
+
 .CloseTeamButton {
     position: absolute;
     top: 1rem;
@@ -69,3 +78,30 @@
     border-radius: 20px;
     cursor: pointer;
 }
+
+.PlayersSearch {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-top: 2rem;
+    padding-bottom: .5rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    overflow: auto;
+    height: 100%;
+    margin-bottom: .5rem;
+}
+
+.PlayerCard {
+    display: flex;
+    font-size: .8rem;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: .5rem;
+    margin-top: .5rem;
+    border: 1px solid #000;
+    border-radius: 10px;
+    background-color: #f57373;}
