@@ -2,12 +2,12 @@
     width: 100%;
     display: flex;
     justify-content: center;
-    position: absolute;
-    margin-top: 25vh;
+    position: relative;
+    margin-top: 2vh;
   }
   
   .SearchBar input {
-    width: 54%;
+    width: 100%;
     border: none;
     background-color: #ffffffa4;
     backdrop-filter: blur(0.4rem);

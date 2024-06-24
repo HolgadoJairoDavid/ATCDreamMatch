@@ -8,3 +8,64 @@
     height: 100vh;
     background-color: #f0f0f0;
 }
+
+.AddTeamButton {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+    background-color: #f57373;
+    border: 1px solid #dd6161;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.AddTeamModal {
+    display: flex;
+    flex-direction: column;
+    border-radius: 30px;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 30vh;
+    left: 25vw;
+    width: 50vw;
+    height: 50vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+
+.AddTeamModal form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 80%;
+    height: 80%;
+}
+
+.AddTeamModal input {
+    width: 100%;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+    border: 1px solid #000;
+    border-radius: 5px;
+}
+
+.AddTeamModal button {
+    padding: 0.5rem;
+    background-color: #ee7d7d;
+    border: 1px solid #e47e7e;
+    border-radius: 35px;
+    cursor: pointer;
+}
+
+.CloseTeamButton {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    padding: 0.5rem;
+    background-color: #f57373;
+    border: 1px solid #dd6161;
+    border-radius: 20px;
+    cursor: pointer;
+}
