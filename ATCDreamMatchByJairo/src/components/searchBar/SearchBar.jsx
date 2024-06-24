@@ -6,7 +6,7 @@ const SearchBar = () => {
     const { setPlayersSearch } = useTeamsStore(state => state);
     const handleSearch = async (e) => {
         const name = e.target.value;
-        if (name.trim().length < 1) {
+        if (name.trim().length < 3) {
             return;
         }
         try {
@@ -15,7 +15,6 @@ const SearchBar = () => {
                 console.error(response.data.error);
                 return;
             }
-            console.log(response.data);
             setPlayersSearch(response.data);
         } catch (error) {
             console.error(error);
@@ -26,7 +25,7 @@ const SearchBar = () => {
         <input
             type="text"
             onChange={handleSearch}
-            placeholder="Search"
+            placeholder="Buscar"
         />
         </div>
     );

@@ -11,7 +11,7 @@ const useTeamsStore = create((set) => ({
     setTeams: (teams) => set({ teams: teams }),
     removeAllTeams: () => set({ teams: [] }),
     addTeam: (team) => set((state) => ({ teams: [...state.teams, team] })),
-    removeTeam: (team) => set((state) => ({ teams: state.teams.filter((t) => t !== team) })),
+    removeTeam: (team) => set((state) => ({ teams: state.teams.filter((t) => t.name !== team.name) })),
     openAddTeam: () => set({ addTeamIsOpen: true }),
     closeAddTeam: () => set({ addTeamIsOpen: false }),
     setPlayersSearch: (players) => set({ playersSearch: players }),
@@ -23,6 +23,7 @@ const useTeamsStore = create((set) => ({
         name: '',
         players: []
     } }),
+    getTeamCurrent: () => useTeamsStore.getState().teamCurrent,
   }))
 
 export default useTeamsStore;

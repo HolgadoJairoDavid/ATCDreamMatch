@@ -9,6 +9,32 @@
     background-color: #f0f0f0;
 }
 
+.TeamCard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 1rem;
+    margin-top: 1rem;
+    border: 1px solid #000;
+    border-radius: 10px;
+    background-color: #f57373;
+
+}
+
+.DeleteTeam {
+    position: fixed;
+    margin-bottom: 3rem;
+    margin-left: 12rem;
+    padding: 0.5rem;
+    background-color: #f5caca;
+    border: 1px solid #dd6161;
+    border-radius: 20px;
+    cursor: pointer;
+
+}
+
 .AddTeamButton {
     margin-top: 1rem;
     margin-bottom: 1rem;
@@ -26,10 +52,10 @@
     align-items: center;
     justify-content: center;
     position: fixed;
-    top: 30vh;
+    top: 15vh;
     left: 25vw;
     width: 50vw;
-    height: 50vh;
+    height: 80vh;
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 1000;
     padding-bottom: 1rem;
@@ -89,13 +115,14 @@
     padding-left: 1rem;
     padding-right: 1rem;
     overflow: auto;
-    height: 100%;
+    height: 16rem;
     margin-bottom: .5rem;
 }
 
 .PlayerCard {
     display: flex;
-    font-size: .8rem;
+    font-size: .6rem;
+    height: 5rem;
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -104,4 +131,44 @@
     margin-top: .5rem;
     border: 1px solid #000;
     border-radius: 10px;
-    background-color: #f57373;}
+    background-color: #f57373;
+}
+
+.PlayerCard p {
+    color: #000;
+    font-size: .7rem;
+}
+
+.PlayerCard button {
+    height: 60%;
+    width: 14%;
+    text-align: center;
+    font-size: large;
+    background-color: #f8f6f6;
+    border: 1px solid #e47e7e;
+    border-radius: 100%;
+    cursor: pointer;
+}
+
+.PlayersAdded {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-top: 2rem;
+    padding-bottom: .5rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    overflow: auto;
+    height: 16rem;
+    margin-bottom: .5rem;
+}
+
+.ContainerPlayers {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+    height: 100%;
+    padding: .5rem;
+    margin-top: .5rem;
+}
