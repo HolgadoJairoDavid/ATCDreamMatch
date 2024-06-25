@@ -1,6 +1,8 @@
 import {create} from 'zustand';
+import {persist} from 'zustand/middleware';
 
-const useTeamsStore = create((set) => ({
+const useTeamsStore = create(persist(
+  (set) => ({
     teams: [],
     playersSearch: [],
     addTeamIsOpen: false,
@@ -24,6 +26,10 @@ const useTeamsStore = create((set) => ({
         players: []
     } }),
     getTeamCurrent: () => useTeamsStore.getState().teamCurrent,
-  }))
+  }),
+  {
+    name: 'teams-store',
+  }
+))
 
 export default useTeamsStore;

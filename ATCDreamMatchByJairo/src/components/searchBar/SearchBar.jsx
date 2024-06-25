@@ -7,6 +7,7 @@ const SearchBar = () => {
     const handleSearch = async (e) => {
         const name = e.target.value;
         if (name.trim().length < 3) {
+            setPlayersSearch([]);
             return;
         }
         try {
@@ -15,7 +16,11 @@ const SearchBar = () => {
                 console.error(response.data.error);
                 return;
             }
-            setPlayersSearch(response.data);
+            setPlayersSearch(response.data.slice(0, 30).map((player) => ({
+                    player_id: player.player_id,
+                    player_name: player.player_name,
+                    player_type: player.player_type
+            })));
         } catch (error) {
             console.error(error);
         }

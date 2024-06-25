@@ -3,6 +3,8 @@ import style from './teams.module.css'
 import NavBar from '../../components/navBar/NavBar'
 import SearchBar from '../../components/searchBar/SearchBar'
 import useTeamsStore from '../../stores/store'
+import Toast from '../../components/toast/Toast'
+import Confetti from '../../components/confetti/Confetti'
 import validateFormTeams from '../../helpers/validateFormTeams'
 
 const Teams = () => {
@@ -12,6 +14,7 @@ const Teams = () => {
         name: '',
         players: ''
     });
+    
     const [countPlayersAdded, setCountPlayersAdded] = useState(0)
     const [players, setPlayers] = useState(getTeamCurrent().players)
     const handleClickCloseModal = () => {
@@ -25,13 +28,18 @@ const Teams = () => {
         })
         removeTeamCurrent()
     }
+
+    const [showToast, setShowToast] = useState(false)
+    const handleCloseToast = () => {
+        setShowToast(false)
+    }
     const handleForm = (e) => {
         setTeamCurrent({
             ...teamCurrent,
             name: e.target.value
         })
         const team = getTeamCurrent()
-        setMessageError(validateFormTeams(team))
+        setMessageError(validateFormTeams(team, teams))
     }
     const handleAddPlayer = (player) => {
         if (players.length === 5) {
@@ -39,10 +47,14 @@ const Teams = () => {
         }
         setTeamCurrent({
             ...teamCurrent,
-            players: players.some((p) => p.player_id === player.player_id) ? teamCurrent.players : [...teamCurrent.players, player]
+            players: players.some((p) => p.player_id === player.player_id) ? teamCurrent.players : [...teamCurrent.players, {
+                player_id: player.player_id,
+                player_name: player.player_name,
+                player_type: player.player_type
+            }]
         })
         setPlayers([...getTeamCurrent().players])
-        setMessageError(validateFormTeams(getTeamCurrent()))
+        setMessageError(validateFormTeams(getTeamCurrent(), teams))
         setCountPlayersAdded(countPlayersAdded + 1)
     }
     const handleRemovePlayer = (player) => {
@@ -51,12 +63,11 @@ const Teams = () => {
             players: teamCurrent.players.filter((p) => p.player_id !== player.player_id)
         })
         setPlayers(players.filter((p) => p.player_id !== player.player_id))
-        setMessageError(validateFormTeams(getTeamCurrent()))
+        setMessageError(validateFormTeams(getTeamCurrent(), teams))
     }
     const saveTeam = () => {
-        console.log('Saving team')
         const team = getTeamCurrent()
-        setMessageError(validateFormTeams(team))
+        setMessageError(validateFormTeams(team, teams))
         if (messageError.name !== '' || messageError.players !== '') {
             return
         }
@@ -69,20 +80,35 @@ const Teams = () => {
             name: '',
             players: ''
         })
-        
+
+        setShowToast(true)
         removeTeamCurrent()
+        setTimeout(() => {
+            setShowToast(false)
+        }, 3000)
+
+    }
+
+    const disabledButtonAddPlayer = (player) => {
+       return players?.some((p) => p.player_id === player.player_id) || players.length === 5 || teams?.some((t) => t.players.some((p) => p.player_id === player.player_id))
     }
     return (
         <div>
             <NavBar />
+            {showToast && <Confetti />}
+            {showToast && <Toast title="Éxito" message="Se guardó correctamente" handleClose={handleCloseToast} error={false} /> }
             <div className={style.Teams}>
-                {!addTeamIsOpen && <h1>Teams</h1>}
+                {!addTeamIsOpen && <h1>Equipos</h1>}
                 <div className={style.TeamsContainer}>
                     {teams.length > 0 && !addTeamIsOpen && teams.map((team, index) => (
                         <div key={index} className={style.TeamCard}>
+                            <div>
                             <h2>{team.name}</h2>
+                            <button>Ver Más</button>
+                            </div>
+                            <div className={style.ContainerDeleteTeam}>
                             <button onClick={() => removeTeam(team)} className={style.DeleteTeam}>X</button>
-                            <button>View Details</button>
+                            </div>
                         </div>
                     )) } 
                     
@@ -101,10 +127,9 @@ const Teams = () => {
                                 <div className={style.PlayersSearch}>
                                     {playersSearch.length > 0 && playersSearch.sort().slice(0, 10).map((player, index) => (
                                         <div key={index} className={style.PlayerCard}>
-                                            <button onClick={() => handleAddPlayer({...player})} value={player}>+</button>
+                                            <button onClick={() => handleAddPlayer({...player})} value={player} disabled={disabledButtonAddPlayer(player)}>+</button>
                                             <h2>{player.player_name}</h2>
                                             <p>{player.player_type}</p>
-                                        
                                         </div>
                                     ))}
                                 </div>

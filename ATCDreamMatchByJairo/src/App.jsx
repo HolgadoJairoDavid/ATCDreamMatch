@@ -2,10 +2,10 @@ import './App.css'
 import {
   Home,
   Teams,
-  Error
+  Error,
+  Detail
 } from './views/index.js'
 import {Routes, Route} from 'react-router-dom';
-import NavBar from "./components/navBar/NavBar";
 
 function App() {
 
@@ -21,6 +21,9 @@ function App() {
 
           {/* error */}
           <Route path='*' element={<Error />} />
+
+          {/* detail */}
+          <Route path='/detail/:id' element={<Detail />} />
 
         </Routes>
       </div>
