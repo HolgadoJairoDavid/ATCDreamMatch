@@ -12,7 +12,15 @@ const useTeamsStore = create(persist(
     },
     setTeams: (teams) => set({ teams: teams }),
     removeAllTeams: () => set({ teams: [] }),
-    addTeam: (team) => set((state) => ({ teams: [...state.teams, team] })),
+    upsertTeam: (team) => set((state) => {
+        if (team.team_id !== undefined) {
+            const teamsNew = state.teams
+            teamsNew[team.team_id] = team
+            return { teams: teamsNew }
+        } else {
+            return { teams: [...state.teams, team] }
+        }
+    }),
     removeTeam: (team) => set((state) => ({ teams: state.teams.filter((t) => t.name !== team.name) })),
     openAddTeam: () => set({ addTeamIsOpen: true }),
     closeAddTeam: () => set({ addTeamIsOpen: false }),

@@ -3,11 +3,12 @@ import style from './modalTeamUpsert.module.css'
 import { useState } from 'react'
 import useTeamsStore from '../../stores/store'
 import validateFormTeams from '../../helpers/validateFormTeams'
+import useToastStore from '../../stores/toastStore'
 
-const ModalTeamUpsert = ({ setShowToast }) => {
-    const { closeAddTeam, playersSearch, removeAllPlayersSearch, teamCurrent, setTeamCurrent, removeTeamCurrent, getTeamCurrent, addTeam, teams} = useTeamsStore(state => state)
+const ModalTeamUpsert = () => {
+    const { closeAddTeam, playersSearch, removeAllPlayersSearch, teamCurrent, setTeamCurrent, removeTeamCurrent, getTeamCurrent, upsertTeam, teams} = useTeamsStore(state => state)
+    const { setToast } = useToastStore(state => state)
     const [countPlayersAdded, setCountPlayersAdded] = useState(0)
-    const [players, setPlayers] = useState(getTeamCurrent().players)
     const [messageError, setMessageError] = useState({
         name: '',
         players: ''
@@ -16,12 +17,13 @@ const ModalTeamUpsert = ({ setShowToast }) => {
     const handleRemovePlayer = (player) => {
         setTeamCurrent({
             ...teamCurrent,
-            players: teamCurrent.players.filter((p) => p.player_id !== player.player_id)
+            players: getTeamCurrent().players.filter((p) => p.player_id !== player.player_id)
         })
-        setPlayers(players.filter((p) => p.player_id !== player.player_id))
         setMessageError(validateFormTeams(getTeamCurrent(), teams))
     }
+    const [teamName, setTeamName] = useState(getTeamCurrent().name);
     const handleForm = (e) => {
+        setTeamName(e.target.value); 
         setTeamCurrent({
             ...teamCurrent,
             name: e.target.value
@@ -30,18 +32,17 @@ const ModalTeamUpsert = ({ setShowToast }) => {
         setMessageError(validateFormTeams(team, teams))
     }
     const handleAddPlayer = (player) => {
-        if (players.length === 5) {
+        if (getTeamCurrent().players.length === 5) {
             return
         }
         setTeamCurrent({
             ...teamCurrent,
-            players: players.some((p) => p.player_id === player.player_id) ? teamCurrent.players : [...teamCurrent.players, {
+            players: getTeamCurrent().players.some((p) => p.player_id === player.player_id) ? getTeamCurrent().players : [...getTeamCurrent().players, {
                 player_id: player.player_id,
                 player_name: player.player_name,
                 player_type: player.player_type
             }]
         })
-        setPlayers([...getTeamCurrent().players])
         setMessageError(validateFormTeams(getTeamCurrent(), teams))
         setCountPlayersAdded(countPlayersAdded + 1)
     }
@@ -49,7 +50,7 @@ const ModalTeamUpsert = ({ setShowToast }) => {
         closeAddTeam()
         setCountPlayersAdded(0)
         removeAllPlayersSearch()
-        setPlayers([])
+    
         setMessageError({
             name: '',
             players: ''
@@ -62,34 +63,34 @@ const ModalTeamUpsert = ({ setShowToast }) => {
         if (messageError.name !== '' || messageError.players !== '') {
             return
         }
-        addTeam(team)
+        upsertTeam(team)
         closeAddTeam()
         removeAllPlayersSearch()
         setCountPlayersAdded(0)
-        setPlayers([])
+    
         setMessageError({
             name: '',
             players: ''
         })
 
-        setShowToast(true)
+        setToast(true)
         removeTeamCurrent()
         setTimeout(() => {
-            setShowToast(false)
+            setToast(false)
         }, 3000)
 
     }
 
     const disabledButtonAddPlayer = (player) => {
-        return players?.some((p) => p.player_id === player.player_id) || players.length === 5 || teams?.some((t) => t.players.some((p) => p.player_id === player.player_id))
+        return getTeamCurrent().players?.some((p) => p.player_id === player.player_id) || getTeamCurrent().players.length === 5 || teams?.some((t) => t.players.some((p) => p.player_id === player.player_id))
      }
 
      
     return (
         <div className={style.AddTeamModal}>
-                                <button className={style.CloseTeamButton} onClick={handleClickCloseModal}>Close</button>
+                                <button className={style.CloseTeamButton} onClick={handleClickCloseModal}>Cerrar</button>
                                 <form>
-                                    <input type="text" placeholder="Nombre del equipo" onChange={handleForm}/>
+                                    <input type="text" placeholder="Nombre del equipo" onChange={handleForm} value={teamName}/>
                                     {messageError && messageError.name !== "" && <p>{messageError.name}</p>}
                                     <SearchBar />
                                 </form>
@@ -105,7 +106,7 @@ const ModalTeamUpsert = ({ setShowToast }) => {
                                 </div>
                                 {/* Current players added */}
                                 <div className={style.PlayersAdded}>
-                                    {players.length > 0 && players.map((player, index) => (
+                                    {getTeamCurrent().players?.length > 0 && getTeamCurrent().players?.map((player, index) => (
                                         <div key={index} className={style.PlayerCard}>
                                             <button onClick={() => handleRemovePlayer({...player})} value={player}>-</button>
                                             <h2>{player.player_name}</h2>
@@ -115,7 +116,7 @@ const ModalTeamUpsert = ({ setShowToast }) => {
                                 </div>
                                 </div>
                                 {messageError && messageError.players !== "" && countPlayersAdded !== 0 && <p>{messageError.players}</p>}
-                                <button onClick={() => saveTeam()} disabled={getTeamCurrent().name === "" || players.length < 5 || messageError.name !== "" || messageError.players !== ""}>Save team</button>
+                                <button onClick={() => saveTeam()} disabled={getTeamCurrent().name === "" || getTeamCurrent().players?.length < 5 || messageError.name !== "" || messageError.players !== ""}>Save team</button>
                             </div>
                         
     )
