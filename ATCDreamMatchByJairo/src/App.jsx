@@ -23,7 +23,7 @@ function App() {
           <Route path='*' element={<Error />} />
 
           {/* detail */}
-          <Route path='/detail/:id' element={<Detail />} />
+          <Route path='/detail/:name' element={<Detail />} />
 
         </Routes>
       </div>

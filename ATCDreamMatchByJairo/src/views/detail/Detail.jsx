@@ -1,7 +1,15 @@
+import { useParams } from 'react-router-dom';
+import NavBar from '../../components/navBar/NavBar'
+
 const Detail = () => {
+    const { name } = useParams();
+
     return (
         <div>
-        <h1>Detail</h1>
+            <NavBar />
+            <div>
+                <h2>{name}</h2>
+            </div>
         </div>
     );
     };
