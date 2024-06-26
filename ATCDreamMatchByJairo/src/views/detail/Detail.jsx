@@ -2,7 +2,7 @@ import { useParams, NavLink, useNavigate } from 'react-router-dom';
 import NavBar from '../../components/navBar/NavBar'
 import style from './detail.module.css'
 import Toast from '../../components/toast/Toast'
-import useTeamsStore from '../../stores/store'
+import useTeamsStore from '../../stores/teamsStore'
 import useToastStore from '../../stores/toastStore'
 import ModalTeamUpsert from '../../components/modalTeamUpsert/ModalTeamUpsert';
 import { useState, useEffect } from 'react';

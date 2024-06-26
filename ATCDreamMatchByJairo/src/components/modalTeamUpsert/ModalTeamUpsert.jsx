@@ -1,12 +1,14 @@
 import SearchBar from '../../components/searchBar/SearchBar'
 import style from './modalTeamUpsert.module.css'
 import { useState } from 'react'
-import useTeamsStore from '../../stores/store'
+import useTeamsStore from '../../stores/teamsStore'
+import useLoadingStore from '../../stores/loadingStore'
 import validateFormTeams from '../../helpers/validateFormTeams'
 import useToastStore from '../../stores/toastStore'
 
 const ModalTeamUpsert = () => {
     const { closeAddTeam, playersSearch, removeAllPlayersSearch, teamCurrent, setTeamCurrent, removeTeamCurrent, getTeamCurrent, upsertTeam, teams} = useTeamsStore(state => state)
+    const { isLoading } = useLoadingStore(state => state)
     const { setToast } = useToastStore(state => state)
     const [countPlayersAdded, setCountPlayersAdded] = useState(0)
     const [messageError, setMessageError] = useState({
@@ -90,12 +92,13 @@ const ModalTeamUpsert = () => {
         <div className={style.AddTeamModal}>
                                 <button className={style.CloseTeamButton} onClick={handleClickCloseModal}>Cerrar</button>
                                 <form>
-                                    <input type="text" placeholder="Nombre del equipo" onChange={handleForm} value={teamName}/>
+                                    <input name='teamName' type="text" placeholder="Nombre del equipo" onChange={handleForm} value={teamName}/>
                                     {messageError && messageError.name !== "" && <p>{messageError.name}</p>}
                                     <SearchBar />
                                 </form>
                                 <div className={style.ContainerPlayers}>
-                                <div className={style.PlayersSearch}>
+                                {isLoading && <p>Buscando...</p>}
+                                {!isLoading && <div className={style.PlayersSearch}>
                                     {playersSearch.length > 0 && playersSearch.sort().slice(0, 10).map((player, index) => (
                                         <div key={index} className={style.PlayerCard}>
                                             <button onClick={() => handleAddPlayer({...player})} value={player} disabled={disabledButtonAddPlayer(player)}>+</button>
@@ -103,7 +106,7 @@ const ModalTeamUpsert = () => {
                                             <p>{player.player_type}</p>
                                         </div>
                                     ))}
-                                </div>
+                                </div>}
                                 {/* Current players added */}
                                 <div className={style.PlayersAdded}>
                                     {getTeamCurrent().players?.length > 0 && getTeamCurrent().players?.map((player, index) => (

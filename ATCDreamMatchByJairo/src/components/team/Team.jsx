@@ -1,6 +1,6 @@
 import style from './team.module.css'
 import { NavLink } from 'react-router-dom';
-import useTeamsStore from '../../stores/store';
+import useTeamsStore from '../../stores/teamsStore';
 
 const Team = ({name, team}) => {
     const {removeTeam} = useTeamsStore(state => state)
