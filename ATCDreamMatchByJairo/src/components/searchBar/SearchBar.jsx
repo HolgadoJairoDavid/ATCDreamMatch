@@ -37,7 +37,7 @@ const SearchBar = () => {
                 return;
             }
             if (inputValue.trim().length > 0) {
-                setPlayers(data.slice(0, 30).map((player) => ({
+                setPlayers(data.slice(0, 60).map((player) => ({
                     player_id: player.player_id,
                     player_name: player.player_name,
                     player_type: player.player_type
