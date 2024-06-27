@@ -58,7 +58,7 @@ const SearchBar = () => {
         <input
             type="text"
             onChange={(e)=> setInputValue(e.target.value)}
-            placeholder="Buscar"
+            placeholder="Buscar Jugadores..."
         />
         </div>
     );

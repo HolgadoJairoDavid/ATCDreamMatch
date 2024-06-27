@@ -7,8 +7,9 @@ const NavBar = () => {
         <div className={style.NavBar}>
              <nav className={style.navBarDisplay}>
             <div className={style.navBarElements}>
+                <div className={style.navBarLogo}>
                 <NavLink to="/" className={style.NavLink}><img src={home} alt="" className={style.imgHome}/></NavLink>
-              
+                </div>
                 <div className={style.navBarOptions}>
                     <ul className="navbar-nav">
                         <li className="nav-item">
