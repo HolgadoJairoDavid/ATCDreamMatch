@@ -34,6 +34,7 @@ const useTeamsStore = create(persist(
         players: []
     } }),
     getTeamCurrent: () => useTeamsStore.getState().teamCurrent,
+    getCurrentAddIsOpen: () => useTeamsStore.getState().addTeamIsOpen,
   }),
   {
     name: 'teams-store',

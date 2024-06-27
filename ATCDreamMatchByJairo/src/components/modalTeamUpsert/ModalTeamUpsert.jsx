@@ -6,17 +6,24 @@ import useTeamsStore from '../../stores/teamsStore'
 import useLoadingStore from '../../stores/loadingStore'
 import validateFormTeams from '../../helpers/validateFormTeams'
 import useToastStore from '../../stores/toastStore'
+import usePlayersStore from '../../stores/playersStore'
 
 const ModalTeamUpsert = () => {
-    const { closeAddTeam, playersSearch, removeAllPlayersSearch, teamCurrent, setTeamCurrent, removeTeamCurrent, getTeamCurrent, upsertTeam, teams} = useTeamsStore(state => state)
-    const { isLoading } = useLoadingStore(state => state)
+    const { closeAddTeam, removeAllPlayersSearch, teamCurrent, setTeamCurrent, removeTeamCurrent, getTeamCurrent, upsertTeam, teams} = useTeamsStore(state => state)
+    const { setIsLoading, getCurrentLoading } = useLoadingStore(state => state)
     const { setToast } = useToastStore(state => state)
+    const {players, playersFiltered, setPlayersFiltered, filterType, setFilterType} = usePlayersStore(state => state)
     const [countPlayersAdded, setCountPlayersAdded] = useState(0)
     const [messageError, setMessageError] = useState({
         name: '',
         players: ''
     });
     const match = useMatch('/teams')
+
+    const handleSelectFilterPlayer = (e) => {
+        setFilterType(e.target.value)
+        setPlayersFiltered(e.target.value)
+    }
     
     const handleRemovePlayer = (player) => {
         setTeamCurrent({
@@ -54,7 +61,9 @@ const ModalTeamUpsert = () => {
         closeAddTeam()
         setCountPlayersAdded(0)
         removeAllPlayersSearch()
-    
+        setFilterType('')
+        setPlayersFiltered([])
+        setIsLoading(false)
         setMessageError({
             name: '',
             players: ''
@@ -71,11 +80,13 @@ const ModalTeamUpsert = () => {
         closeAddTeam()
         removeAllPlayersSearch()
         setCountPlayersAdded(0)
-    
+        setFilterType('')
+        setPlayersFiltered([])
         setMessageError({
             name: '',
             players: ''
         })
+        setIsLoading(false)
 
         setToast(true)
         removeTeamCurrent()
@@ -98,10 +109,24 @@ const ModalTeamUpsert = () => {
                                     {messageError && messageError.name !== "" && <p>{messageError.name}</p>}
                                     <SearchBar />
                                 </form>
+                                    {
+                                        players.length > 0 && <div>
+                                            <select name="filterPlayer" id="" onChange={handleSelectFilterPlayer} value={filterType}>
+                                            <option value="" disabled={true}>Filtrar por tipo</option>
+                                            <option value="All">Todos</option>
+                                                {
+                                                    Array.from(new Set(players.map(player => player.player_type)))
+                                                        .map((playerType, index) => (
+                                                          <option key={index} value={playerType}>{playerType}</option>
+                                                        ))
+                                                }
+                                            </select>
+                                        </div>
+                                    }
                                 <div className={style.ContainerPlayers}>
-                                {isLoading && <p>Buscando...</p>}
-                                {!isLoading && <div className={style.PlayersSearch}>
-                                    {playersSearch.length > 0 && playersSearch.sort().slice(0, 10).map((player, index) => (
+                                {getCurrentLoading() && <p>Buscando...</p>}
+                                {!getCurrentLoading() && <div className={style.PlayersSearch}>
+                                    {playersFiltered.length > 0 && playersFiltered.sort().slice(0, 10).map((player, index) => (
                                         <div key={index} className={style.PlayerCard}>
                                             <button onClick={() => handleAddPlayer({...player})} value={player} disabled={disabledButtonAddPlayer(player)}>+</button>
                                             <h2>{player.player_name}</h2>

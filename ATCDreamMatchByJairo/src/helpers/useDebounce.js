@@ -1,10 +1,11 @@
 import {useEffect, useState} from 'react';
 import useLoadingStore from '../stores/loadingStore';
-
+import useTeamsStore from '../stores/teamsStore';
 // hook to debounce input value
 
 export const useDebounce = (value, delay) => {
     const [debouncedValue, setDebouncedValue] = useState(value);
+    const { getCurrentAddIsOpen } = useTeamsStore(state => state);
     const { setIsLoading } = useLoadingStore(state => state);
     useEffect(() => {
         const handler = setTimeout(() => {
@@ -12,7 +13,7 @@ export const useDebounce = (value, delay) => {
         }, delay);
         
         return () => {
-            if (value.trim().length > 0) {
+            if (value.trim().length > 0 && getCurrentAddIsOpen()) {
                 setIsLoading(true);
             } else {
                 setIsLoading(false);
