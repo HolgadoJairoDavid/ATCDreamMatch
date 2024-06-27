@@ -130,13 +130,15 @@ const ModalTeamUpsert = () => {
      
     return (
         <div className={style.AddTeamModal}>
+                                <div className={style.FormTeamModal}>
                                 <button className={style.CloseTeamButton} onClick={handleClickCloseModal}>Cerrar</button>
                                 <form>
                                     <input name='teamName' type="text" placeholder="Nombre del equipo" onChange={handleForm} value={teamName}/>
-                                    {messageError && messageError.name !== "" && <p>{messageError.name}</p>}
+                                    {messageError && messageError.name !== "" && <p className={style.MessageError}>{messageError.name}</p>}
                                     <SearchBar />
                                 </form>
-                                    {
+                                   <div className={style.FiltersAndOrdered}>
+                                   {
                                         players.length > 0 && <div>
                                             <select name="filterPlayer" onChange={handleSelectFilterPlayer} value={filterType}>
                                             <option value="" disabled={true}>Filtrar por tipo</option>
@@ -158,47 +160,53 @@ const ModalTeamUpsert = () => {
                                             </select>
                                         </div>
                                     }
-                                <div className={style.ContainerPlayers}>
-                                {getCurrentLoading() && <p>Buscando...</p>}
-                                {!getCurrentLoading() && <div className={style.PlayersSearch}>
-                                    {currentPlayers.length > 0 && currentPlayers.sort().slice(0, 10).map((player, index) => (
-                                        <div key={index} className={style.PlayerCard}>
-                                            <button onClick={() => handleAddPlayer({...player})} value={player} disabled={disabledButtonAddPlayer(player)}>+</button>
-                                            <h2>{player.player_name}</h2>
-                                            <p>{player.player_type}</p>
-                                        </div>
-                                    ))}
-                                    
-                                </div>}
-                                {/* Current players added */}
-                                <div className={style.PlayersAdded}>
-                                    {getTeamCurrent().players?.length > 0 && getTeamCurrent().players?.map((player, index) => (
-                                        <div key={index} className={style.PlayerCard}>
-                                            <button onClick={() => handleRemovePlayer({...player})} value={player}>-</button>
-                                            <h2>{player.player_name}</h2>
-                                            <p>{player.player_type}</p>
-                                        </div>
-                                    ))}
+                                   </div>
                                 </div>
+                                <div className={style.ContainerPlayers}>
+                                    {getCurrentLoading() && <p>Buscando...</p>}
+                                    {!getCurrentLoading() && <div className={style.PlayersSearch}>
+                                        {currentPlayers.length > 0 && currentPlayers.sort().slice(0, 10).map((player, index) => (
+                                            <div key={index} className={style.PlayerCard}>
+                                                <div className={style.PlayerCardInfo}>
+                                                <button onClick={() => handleAddPlayer({...player})} value={player} disabled={disabledButtonAddPlayer(player)}>+</button>
+                                                <h2>{player.player_name}</h2>
+                                                <p>{player.player_type}</p>
+                                                </div>
+                                            </div>
+                                        ))}
+                                        
+                                </div>}
+                                    <div className={style.PlayersAdded}>
+                                        {getTeamCurrent().players?.length > 0 && getTeamCurrent().players?.map((player, index) => (
+                                            <div key={index} className={style.PlayerCard}>
+                                                <div className={style.PlayerCardInfo}>
+                                                <button onClick={() => handleRemovePlayer({...player})} value={player}>-</button>
+                                                <h2>{player.player_name}</h2>
+                                                <p>{player.player_type}</p>
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
                                 </div>
                                 <div className={style.Pagination}>
-                                        {!(currentPage === 1) && <button onClick={() => setCurrentPage(currentPage - 1)}>
+                                        {<button onClick={() => setCurrentPage(currentPage - 1)} className={!(currentPage === 1) ? style.PrevButton : style.NoPrevButton}>
                                         Anterior
                                         </button>}
                                         {[...Array(totalPages).keys()].map((pageNumber) => (
-                                    <button
-                                        key={pageNumber + 1}
-                                        onClick={() => setCurrentPage(pageNumber + 1)}
-                                        disabled={currentPage === pageNumber + 1}
-                                    >
-                                        {pageNumber + 1}
-                                    </button>
-                                    ))}
-                                        {!(indexOfLastPlayer >= playersFiltered.length) && <button onClick={() => setCurrentPage(currentPage + 1)}>
-                                        Siguiente
+                                        <button
+                                            key={pageNumber + 1}
+                                            onClick={() => setCurrentPage(pageNumber + 1)}
+                                            disabled={currentPage === pageNumber + 1}
+                                            className={style.PaginationButtonNumber}
+                                        >
+                                            {pageNumber + 1}
+                                        </button>
+                                        ))}
+                                            {<button onClick={() => setCurrentPage(currentPage + 1)} className={!(indexOfLastPlayer >= playersFiltered.length) ? style.NextButton : style.NoNextButton}>
+                                            Siguiente
                                         </button>}
-                                    </div>
-                                {messageError && messageError.players !== "" && countPlayersAdded !== 0 && <p>{messageError.players}</p>}
+                                </div>
+                                {messageError && messageError.players !== "" && countPlayersAdded !== 0 && <p className={style.MessageError}>{messageError.players}</p>}
                                 <button onClick={() => saveTeam()} disabled={getTeamCurrent().name === "" || getTeamCurrent().players?.length < 5 || messageError.name !== "" || messageError.players !== ""}>Guardar Equipo</button>
                             </div>
                         
