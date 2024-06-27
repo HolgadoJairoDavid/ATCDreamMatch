@@ -6,7 +6,9 @@ const usePlayersStore = create(persist(
         players: [],
         playersFiltered: [],
         filterType: '',
+        orderBy: '', 
         setFilterType: (value) => set({ filterType: value }),
+        setOrderBy: (value) => set({ orderBy: value }),
         setPlayers: (players) => {
             set({ players });
                 if (get().filterType !== '' && get().filterType !== 'All') { 
@@ -39,9 +41,19 @@ const usePlayersStore = create(persist(
               const filteredPlayers = filterType
                 ? get().players.filter(p => p.player_type === filterType)
                 : get().players;
-              set({ playersFiltered: filteredPlayers });
+            
+              set({ playersFiltered: get().orderBy === 'Ascendent' ? filteredPlayers.sort((a, b) => a.player_name.localeCompare(b.player_name)) : filteredPlayers.sort((a, b) => b.player_name.localeCompare(a.player_name))});
         },
-        }),
+        setPlayersOrderBy: (value) => {
+            if (!value) {
+                set({ playersFiltered: get().playersFiltered });
+                return;
+            }
+            const orderedPlayers = value === "Ascendent" ? get().playersFiltered.sort((a, b) => a.player_name.localeCompare(b.player_name)) : get().playersFiltered.sort((a, b) => b.player_name.localeCompare(a.player_name));
+            set({ playersFiltered: orderedPlayers });
+        }
+    
+    }),
         {
             name: 'players-store',
         }

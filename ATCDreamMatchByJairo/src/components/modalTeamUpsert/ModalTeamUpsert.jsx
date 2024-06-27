@@ -12,8 +12,8 @@ import usePaginateStore from '../../stores/paginateStore'
 const ModalTeamUpsert = () => {
     const { closeAddTeam, removeAllPlayersSearch, teamCurrent, setTeamCurrent, removeTeamCurrent, getTeamCurrent, upsertTeam, teams} = useTeamsStore(state => state)
     const { setIsLoading, getCurrentLoading } = useLoadingStore(state => state)
-    const { setToast } = useToastStore(state => state)
-    const {players, playersFiltered, setPlayersFiltered, filterType, setFilterType } = usePlayersStore(state => state)
+    const { setToast, setShowConfetti } = useToastStore(state => state)
+    const {players, playersFiltered, setPlayersFiltered, filterType, setFilterType, orderBy, setOrderBy, setPlayersOrderBy} = usePlayersStore(state => state)
     const { currentPage, playersPerPage, setCurrentPage} = usePaginateStore(state => state)
     
     const [countPlayersAdded, setCountPlayersAdded] = useState(0)
@@ -34,6 +34,12 @@ const ModalTeamUpsert = () => {
         setFilterType(e.target.value)
         setPlayersFiltered(e.target.value)
         setCurrentPage(1);
+    }
+
+    // HANDLE ORDER BY
+    const handleOrderBy = (e) => {
+        setOrderBy(e.target.value)
+        setPlayersOrderBy(e.target.value)
     }
 
     // HANDLE REMOVE PLAYER
@@ -94,6 +100,9 @@ const ModalTeamUpsert = () => {
         if (messageError.name !== '' || messageError.players !== '') {
             return
         }
+        if (teams.length < 2) {
+            setShowConfetti(true)
+        }
         upsertTeam(team)
         closeAddTeam()
         removeAllPlayersSearch()
@@ -105,11 +114,11 @@ const ModalTeamUpsert = () => {
             players: ''
         })
         setIsLoading(false)
-
         setToast(true)
         removeTeamCurrent()
         setTimeout(() => {
             setToast(false)
+            setShowConfetti(false)
         }, 3000)
 
     }
@@ -129,7 +138,7 @@ const ModalTeamUpsert = () => {
                                 </form>
                                     {
                                         players.length > 0 && <div>
-                                            <select name="filterPlayer" id="" onChange={handleSelectFilterPlayer} value={filterType}>
+                                            <select name="filterPlayer" onChange={handleSelectFilterPlayer} value={filterType}>
                                             <option value="" disabled={true}>Filtrar por tipo</option>
                                             <option value="All">Todos</option>
                                                 {
@@ -138,6 +147,14 @@ const ModalTeamUpsert = () => {
                                                           <option key={index} value={playerType}>{playerType}</option>
                                                         ))
                                                 }
+                                            </select>
+                                        </div>
+                                    }
+                                    { players.length > 0 && <div>
+                                            <select name="orderBy" onChange={handleOrderBy} value={orderBy}>
+                                                <option value="" disabled={true}>Mostrar de forma</option>
+                                                <option value="Ascendent">Ascendente</option>
+                                                <option value="Descendent">Descendente</option>
                                             </select>
                                         </div>
                                     }
