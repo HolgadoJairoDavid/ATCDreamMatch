@@ -27,7 +27,7 @@ const Detail = () => {
             <NavBar />
             {toast && <Toast title="Éxito" message="Se guardó correctamente"  error={false} /> }
             {!addTeamIsOpen && <div className={style.Detail}>
-                <button><NavLink to='/teams'>Volver</NavLink></button>
+               <NavLink to='/teams'> <button>Volver</button></NavLink> 
                 <button onClick={handleEditTeam}>Editar</button>
                 <h2>{name}</h2>
                 {

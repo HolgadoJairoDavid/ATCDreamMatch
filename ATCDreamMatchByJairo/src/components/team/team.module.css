@@ -4,9 +4,17 @@
     width: 100%;
     padding: 1rem 0rem 1rem 1rem;
     margin-top: 1rem;
-    border: 1px solid #000;
+    border: none;
     border-radius: 10px;
     background-color: #f57373;
+    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
+
+}
+
+.TeamCard h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #33486f;
 
 }
 
@@ -30,4 +38,9 @@
 
 .DeleteTeam:hover {
     background-color: #f1a1a1;
+}
+
+.SeeMore {
+    font-size: .9rem;
+    padding: .9rem;
 }

@@ -18,9 +18,9 @@ const NavBar = () => {
                         <li className="nav-item">
                             <NavLink to="/teams" className={style.NavLink}>Teams</NavLink>
                         </li>
-                        <li className="nav-item">
+                        {/* <li className="nav-item">
                             <NavLink to="/favorites" className={style.NavLink}>Favorites</NavLink>
-                        </li>
+                        </li> */}
                     </ul>
                 </div>
             </div>

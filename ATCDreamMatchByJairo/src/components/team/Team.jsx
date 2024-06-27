@@ -9,7 +9,7 @@ const Team = ({name, team}) => {
         <div className={style.TeamCard}>
             <div>
                 <h2>{name}</h2>
-                <button><NavLink to={`/detail/${name}`}>Ver Más</NavLink></button>
+               <NavLink to={`/detail/${name}`}> <button className={style.SeeMore}>Ver Más</button></NavLink>
             </div>
             <div className={style.ContainerDeleteTeam}>
             <button onClick={() => removeTeam(team)} className={style.DeleteTeam}>X</button>

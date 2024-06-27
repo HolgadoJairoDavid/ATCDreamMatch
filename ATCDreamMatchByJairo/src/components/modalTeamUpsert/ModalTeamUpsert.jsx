@@ -199,7 +199,7 @@ const ModalTeamUpsert = () => {
                                         </button>}
                                     </div>
                                 {messageError && messageError.players !== "" && countPlayersAdded !== 0 && <p>{messageError.players}</p>}
-                                <button onClick={() => saveTeam()} disabled={getTeamCurrent().name === "" || getTeamCurrent().players?.length < 5 || messageError.name !== "" || messageError.players !== ""}>Save team</button>
+                                <button onClick={() => saveTeam()} disabled={getTeamCurrent().name === "" || getTeamCurrent().players?.length < 5 || messageError.name !== "" || messageError.players !== ""}>Guardar Equipo</button>
                             </div>
                         
     )

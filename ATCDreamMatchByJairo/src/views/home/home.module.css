@@ -6,5 +6,74 @@
     align-items: center;
     justify-content: center;
     height: 100vh;
-    background-color: #f0f0f0;
+}
+
+.ContainerHome {
+    background-color: rgba(240, 248, 255, 0.531);
+    text-align: center;
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+}
+
+p {
+    font-size: 1rem;
+    font-weight: 700;
+    text-align: center;
+    margin-top: 2rem;
+}
+span {
+    display: block;
+    font-size: 1.5rem;
+    margin-top: 2rem;
+
+}
+
+@media (min-width: 1000px) {
+    .ContainerHome {
+        width: 50vw;
+    }
+ 
+}
+@media (max-width: 800px) {
+  .ContainerHome {
+        width: 60vw;
+    
+  }
+}
+@media (min-width: 600px) {
+    .ContainerHome {
+        width: 70vw;
+    }
+}
+
+@media (max-width: 500px) {
+    .ContainerHome {
+        width: 90vw;
+    }
+}
+
+button {
+    padding: 1rem 2rem;
+    background-color: #1e2c5a;
+    color: #fff;
+    text-decoration: none;
+    border: none;
+    border-radius: 30px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 2rem;
+    transition: transform 0.3s ease;
+    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
+}
+
+button:hover {
+    transform: scale(1.1);
+}
+
+.TeamButton {
+    text-decoration: none;
+    color: #fff;
 }

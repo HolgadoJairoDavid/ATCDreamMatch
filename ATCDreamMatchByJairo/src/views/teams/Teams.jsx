@@ -22,18 +22,20 @@ const Teams = () => {
             {showConfetti && <Confetti />}
             {toast && <Toast title="Éxito" message="Se guardó correctamente" error={false} /> }
             <div className={style.Teams}>
-                {!addTeamIsOpen && <h1>Equipos</h1>}
-                <div className={style.TeamsContainer}>
+                {!addTeamIsOpen && <div className={style.TeamsContainer}>
+                { <h1>Equipos</h1>}
+                <div>
                     {teams?.length > 0 && !addTeamIsOpen && teams.map((team, index) => (
                         <Team key={index} name={team.name} team={team} />
                     )) } 
                     
                     { (teams?.length === 0 && !addTeamIsOpen) && <h2>Parece que aún no tienes equipos. ¡Anímate a crearlos!</h2>}
                     {!addTeamIsOpen && teams?.length < 2 && <button className={style.AddTeamButton} onClick={() => openAddTeam()}>Agregar Equipo</button> }
+                </div>
+                </div>}
                     {
                         addTeamIsOpen && <ModalTeamUpsert />
                     }
-                </div>
             </div>
         </div>
     )

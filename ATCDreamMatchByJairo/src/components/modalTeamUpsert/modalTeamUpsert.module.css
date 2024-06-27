@@ -5,12 +5,12 @@
     align-items: center;
     justify-content: center;
     position: fixed;
-    top: 15vh;
-    left: 20vw;
-    width: 55vw;
+    top: 20vh;
+    left: 15vw;
+    width: 70vw;
     height: 70vh;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 1000;
+    background-color: rgba(0, 0, 0, 0.626);
+    z-index: 10000;
     padding-bottom: 1rem;
 }
 

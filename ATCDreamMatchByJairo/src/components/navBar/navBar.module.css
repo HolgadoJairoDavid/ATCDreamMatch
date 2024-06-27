@@ -1,7 +1,9 @@
 .NavBar{
-    background-color: #c01010;
+    background-color: #1e2c5a;
     width: 100vw;
     position: fixed;
+    box-shadow: -1rem 0rem 4rem rgba(0, 0, 0, .5);
+    height: 5rem;
 }
 .navBarDisplay {
     display: grid;
@@ -23,8 +25,8 @@
 
 .navBarOptions ul li {
     list-style: none;
-    color: #dee7f0;
     font-size: 1.2rem;
+    text-shadow: 0 0rem 1.2rem rgba(0, 0, 0, .5);
     font-weight: 500;
     text-align: center;
     cursor: pointer;
@@ -32,21 +34,24 @@
 
 .NavLink {
     text-decoration: none;
-    color: #dee7f0;
+    color: #fffefe;
     font-size: 1.2rem;
     font-weight: 500;
+    transition: transform 0.3s ease;
 }
 
-.nav-link {
-    font-size: 1.2rem;
-    font-weight: 500;
-}
-
-.nav-link:hover {
+.NavLink:hover {
     color: #dee7f0;
+    font-size: 1.24rem;
+    transform: scale(1.1)
 }
 
 .imgHome {
     width: 50px;
     height: 50px;
+    transition: transform 0.3s ease;
+}
+
+.imgHome:hover {
+    transform: scale(1.1);
 }
