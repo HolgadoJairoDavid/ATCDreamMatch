@@ -27,9 +27,12 @@ const Detail = () => {
             <NavBar />
             {toast && <Toast title="Éxito" message="Se guardó correctamente"  error={false} /> }
             {!addTeamIsOpen && <div className={style.Detail}>
+               <div className={style.ButtonsDetail}>
                <NavLink to='/teams'> <button>Volver</button></NavLink> 
-                <button onClick={handleEditTeam}>Editar</button>
-                <h2>{name}</h2>
+               <button onClick={handleEditTeam}>Editar</button>
+               </div>
+               <div>
+               <h2>{name}</h2>
                 {
                     teamsCopy?.map((team) => {
                         if (team.name === name) {
@@ -39,7 +42,7 @@ const Detail = () => {
                                     <ul>
                                         {
                                             team.players.map((player) => (
-                                                <div key={player.player_id}>
+                                                <div key={player.player_id} className={style.PlayerInfo}>
                                                     <p>{player.player_name}</p>
                                                     <p>{player.player_type}</p>
                                                 </div>
@@ -52,6 +55,7 @@ const Detail = () => {
                 }
                 )
             }
+               </div>
             </div>
             }
              {addTeamIsOpen && <ModalTeamUpsert />}
