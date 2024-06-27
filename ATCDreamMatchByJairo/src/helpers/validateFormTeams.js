@@ -1,4 +1,4 @@
-const validateFormTeams = (team, teams) => {
+const validateFormTeams = (team, teams, isCreateTeam) => {
     const messageError = {
         name: '',
         players: ''
@@ -7,7 +7,7 @@ const validateFormTeams = (team, teams) => {
         messageError.name = 'Name is required'
     }
 
-    if (teams.some((t) => t.name.toLowerCase().trim() === team.name.toLowerCase().trim())) {
+    if (isCreateTeam && teams.some((t) => t.name.toLowerCase().trim() === team.name.toLowerCase().trim())) {
         messageError.name = 'Name already exists'
     }
 

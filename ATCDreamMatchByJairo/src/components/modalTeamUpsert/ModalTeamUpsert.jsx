@@ -1,6 +1,7 @@
 import SearchBar from '../../components/searchBar/SearchBar'
 import style from './modalTeamUpsert.module.css'
 import { useState } from 'react'
+import { useMatch } from 'react-router-dom'
 import useTeamsStore from '../../stores/teamsStore'
 import useLoadingStore from '../../stores/loadingStore'
 import validateFormTeams from '../../helpers/validateFormTeams'
@@ -15,13 +16,14 @@ const ModalTeamUpsert = () => {
         name: '',
         players: ''
     });
+    const match = useMatch('/teams')
     
     const handleRemovePlayer = (player) => {
         setTeamCurrent({
             ...teamCurrent,
             players: getTeamCurrent().players.filter((p) => p.player_id !== player.player_id)
         })
-        setMessageError(validateFormTeams(getTeamCurrent(), teams))
+        setMessageError(validateFormTeams(getTeamCurrent(), teams, match))
     }
     const [teamName, setTeamName] = useState(getTeamCurrent().name);
     const handleForm = (e) => {
@@ -31,7 +33,7 @@ const ModalTeamUpsert = () => {
             name: e.target.value
         })
         const team = getTeamCurrent()
-        setMessageError(validateFormTeams(team, teams))
+        setMessageError(validateFormTeams(team, teams, match))
     }
     const handleAddPlayer = (player) => {
         if (getTeamCurrent().players.length === 5) {
@@ -45,7 +47,7 @@ const ModalTeamUpsert = () => {
                 player_type: player.player_type
             }]
         })
-        setMessageError(validateFormTeams(getTeamCurrent(), teams))
+        setMessageError(validateFormTeams(getTeamCurrent(), teams, match))
         setCountPlayersAdded(countPlayersAdded + 1)
     }
     const handleClickCloseModal = () => {
@@ -61,7 +63,7 @@ const ModalTeamUpsert = () => {
     }
     const saveTeam = () => {
         const team = getTeamCurrent()
-        setMessageError(validateFormTeams(team, teams))
+        setMessageError(validateFormTeams(team, teams, match))
         if (messageError.name !== '' || messageError.players !== '') {
             return
         }
