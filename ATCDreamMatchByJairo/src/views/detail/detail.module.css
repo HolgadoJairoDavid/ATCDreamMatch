@@ -44,3 +44,30 @@
     font-weight: 100;
 
 }
+
+@media (max-width: 500px) {
+    .Detail {
+        width: 90vw;
+        height: 80vh;
+        top: 10vh;
+        left: 5vw;
+    }
+
+    .PlayerInfo {
+        width: 40%;
+    }
+
+    .Detail h2 {
+        margin-left: 20rem;
+    }
+
+    .Detail h3 {
+        margin-left: 20rem;
+    }
+
+    .Detail ul {
+        width: 30rem;
+        margin-left: 20rem;
+    }
+    
+}
