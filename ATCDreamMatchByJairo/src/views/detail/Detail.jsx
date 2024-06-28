@@ -43,7 +43,10 @@ const Detail = () => {
                         if (team.name === name) {
                             return (
                                 <div key={team.name}>
-                                    <h3>Jugadores</h3>
+                                    <div className={style.SectionPlayersAndType}>
+                                        <h3>Jugadores</h3>
+                                        <h3>Roles</h3>
+                                    </div>
                                     <ul>
                                         {
                                             team.players.map((player) => (
