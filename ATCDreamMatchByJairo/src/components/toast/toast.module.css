@@ -1,6 +1,6 @@
 .ToastError {
     position: fixed;
-    top: 0;
+    top: 5.1rem;
     right: 0;
     z-index: 9999;
     padding: 1rem;
@@ -14,9 +14,10 @@
 
 .ToastSuccess {
     position: fixed;
-    top: 0;
+    top: 5.1rem;
     right: 0;
     z-index: 9999;
+    height: 5rem;
     padding: 1rem;
     margin: 1rem;
     background-color: #8cff9f;
@@ -24,4 +25,24 @@
     border-radius: 0.5rem;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     animation: slideIn 0.5s forwards, slideOut 0.5s forwards 2.5s;
+    display: grid;
+    grid-template-columns: 90% 10%;
+}
+
+.ToastSuccess h3 {
+    margin: 0;
+    text-shadow: 0 0 1px rgba(0, 0, 0, 0.5);
+}
+
+.ToastSuccess p {
+    margin: 0;
+    text-shadow: 0 0 1px rgba(0, 0, 0, 0.5);
+}
+
+.ToastSuccess button {
+    margin: 0;
+    padding: 0.5rem;
+    font-size: .8rem;
+    height: fit-content;
+    width: fit-content;
 }
