@@ -6,6 +6,8 @@ import useTeamsStore from '../../stores/teamsStore'
 import useToastStore from '../../stores/toastStore'
 import ModalTeamUpsert from '../../components/modalTeamUpsert/ModalTeamUpsert';
 import { useState, useEffect } from 'react';
+import { Tooltip } from 'react-tooltip';
+
 const Detail = () => {
     const navigate = useNavigate()
     const { name } = useParams();
@@ -29,8 +31,10 @@ const Detail = () => {
                 {toast && <Toast title="Éxito" message="Se guardó correctamente"  error={false} /> }
             {!addTeamIsOpen && <div className={style.Detail}>
                <div className={style.ButtonsDetail}>
-               <NavLink to='/teams'> <button>Volver</button></NavLink> 
-               <button onClick={handleEditTeam}>Editar</button>
+               <NavLink to='/teams'> <button data-tooltip-id="tool-back" data-tooltip-content="Volver">Volver</button></NavLink> 
+                <Tooltip id="tool-back" place="left"/>
+               <button onClick={handleEditTeam} data-tooltip-id="tool-edit" data-tooltip-content="Editar equipo">Editar</button>
+               <Tooltip id="tool-edit" place="right"/>
                </div>
                <div>
                <h2>{name}</h2>

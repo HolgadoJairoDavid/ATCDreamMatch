@@ -1,6 +1,7 @@
 import {NavLink} from 'react-router-dom';
 import home from "../../assets/home.png"
 import style from "./navBar.module.css";
+import { Tooltip } from 'react-tooltip';
 
 const NavBar = () => {
     return (
@@ -12,12 +13,14 @@ const NavBar = () => {
                 </div>
                 <div className={style.navBarOptions}>
                     <ul className="navbar-nav">
-                        <li className="nav-item">
+                        <li className="nav-item" data-tooltip-id="tool-home" data-tooltip-content="Home">
                             <NavLink to="/" className={style.NavLink}>Home</NavLink>
                         </li>
-                        <li className="nav-item">
+                        <Tooltip id="tool-home" place="bottom"/>
+                        <li className="nav-item" data-tooltip-id="tool-teams" data-tooltip-content="Teams">
                             <NavLink to="/teams" className={style.NavLink}>Teams</NavLink>
                         </li>
+                        <Tooltip id="tool-teams" place="bottom"/>
                         {/* <li className="nav-item">
                             <NavLink to="/favorites" className={style.NavLink}>Favorites</NavLink>
                         </li> */}

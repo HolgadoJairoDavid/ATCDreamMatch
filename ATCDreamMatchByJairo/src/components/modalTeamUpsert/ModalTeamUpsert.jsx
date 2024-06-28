@@ -8,6 +8,7 @@ import validateFormTeams from '../../helpers/validateFormTeams'
 import useToastStore from '../../stores/toastStore'
 import usePlayersStore from '../../stores/playersStore'
 import usePaginateStore from '../../stores/paginateStore'
+import {Tooltip} from "react-tooltip";
 
 const ModalTeamUpsert = () => {
     const { closeAddTeam, removeAllPlayersSearch, teamCurrent, setTeamCurrent, removeTeamCurrent, getTeamCurrent, upsertTeam, teams} = useTeamsStore(state => state)
@@ -134,7 +135,8 @@ const ModalTeamUpsert = () => {
         <div>
                                 <div className={style.AddTeamModal}>
                                 <div className={style.FormTeamModal}>
-                                <button className={style.CloseTeamButton} onClick={handleClickCloseModal}>Cerrar</button>
+                                <button className={style.CloseTeamButton} onClick={handleClickCloseModal} data-tooltip-id="tool-close" data-tooltip-content="Volver">Cerrar</button>
+                                <Tooltip id="tool-close" place="bottom"/>
                                 <form>
                                     <input name='teamName' type="text" placeholder="Nombre del equipo" onChange={handleForm} value={teamName}/>
                                     {messageError && messageError.name !== "" && <p className={style.MessageError}>{messageError.name}</p>}
@@ -212,7 +214,8 @@ const ModalTeamUpsert = () => {
                                 </div>
                                 <div className={style.SaveTeamContainer}>
                                 {messageError && messageError.players !== "" && countPlayersAdded !== 0 && <p className={style.MessageError}>{messageError.players}</p>}
-                                <button onClick={() => saveTeam()} disabled={getTeamCurrent().name === "" || getTeamCurrent().players?.length < 5 || messageError.name !== "" || messageError.players !== ""} className={style.SaveTeam}>Guardar Equipo</button>
+                                <button onClick={() => saveTeam()} disabled={getTeamCurrent().name === "" || getTeamCurrent().players?.length < 5 || messageError.name !== "" || messageError.players !== ""} className={style.SaveTeam}data-tooltip-id="tool-save-team" data-tooltip-content="Guardar equipo">Guardar Equipo</button>
+                                <Tooltip id="tool-save-team" place="left"/>
                                 </div>
                             </div>
                         

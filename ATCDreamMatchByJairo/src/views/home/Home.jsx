@@ -1,6 +1,8 @@
 import style from "./home.module.css";
 import { NavLink } from "react-router-dom";
 import NavBar from '../../components/navBar/NavBar'
+import {Tooltip} from "react-tooltip";
+
 
 const Home = () => {
     return (
@@ -16,8 +18,10 @@ const Home = () => {
             posición, presupuesto, contrato, club, edad...
             En ATC Dream Match, podrás armar tus equipos soñados y crear 
         </p>
+
             <span>¡El partido de tus sueños!</span>
-        <NavLink to='/teams' className={style.TeamButton}><button>Equipos</button></NavLink>
+        <NavLink to='/teams' className={style.TeamButton}><button data-tooltip-id="tool-team" data-tooltip-content="Ver o Crear equipos">Equipos</button></NavLink>
+        <Tooltip id="tool-team" place="bottom"/>
         </div>
         </div>
        

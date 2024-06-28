@@ -9,6 +9,7 @@ import Confetti from '../../components/confetti/Confetti'
 import Team from '../../components/team/Team'
 import ModalTeamUpsert from '../../components/modalTeamUpsert/ModalTeamUpsert'
 import SnackBar from '../../components/snackBar/SnackBar'
+import { Tooltip } from 'react-tooltip'
 
 const Teams = () => {
     const teams = useTeamsStore(state => state.teams)
@@ -30,7 +31,8 @@ const Teams = () => {
                     )) } 
                     
                     { (teams?.length === 0 && !addTeamIsOpen) && <h2>Parece que aún no tienes equipos. ¡Anímate a crearlos!</h2>}
-                    {!addTeamIsOpen && teams?.length < 2 && <button className={style.AddTeamButton} onClick={() => openAddTeam()}>Agregar Equipo</button> }
+                    {!addTeamIsOpen && teams?.length < 2 && <button className={style.AddTeamButton} onClick={() => openAddTeam()} data-tooltip-id="tool-add-team" data-tooltip-content="Crear un equipo">Agregar Equipo</button> }
+                    <Tooltip id="tool-add-team" place="bottom"/>
                 </div>
                 </div>}
                     {
