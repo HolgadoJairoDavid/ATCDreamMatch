@@ -9,7 +9,7 @@ import { useDebounce } from '../../helpers/useDebounce';
 const SearchBar = () => {
     const { setIsLoading } = useLoadingStore(state => state);
     const { setSnack } = useSnackStore(state => state);
-    const { setPlayers, playersFiltered } = usePlayersStore(state => state);
+    const { setPlayers } = usePlayersStore(state => state);
     const [inputValue, setInputValue] = useState('');
     const debouncedSearch = useDebounce(inputValue, 300);
     
@@ -23,16 +23,16 @@ const SearchBar = () => {
                 let {data} = await ClientService.searchPlayers(inputValue);
             if (data.error) {
                 setPlayers([]);
+                
                 if (data.error === 404) {
                     setSnack(true,'No se encontraron jugadores', 'warning');
                 } else {
                     setSnack(true, 'Ocurrió un error, estamos trabajando para resolverlo','error');
                 }
-
+                
                 setTimeout(() => {
                     setSnack(false, '', '');
                 }, 3600);
-
                 setIsLoading(false);
                 return;
             }

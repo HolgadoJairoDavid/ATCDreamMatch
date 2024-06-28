@@ -4,6 +4,8 @@ import style from './detail.module.css'
 import Toast from '../../components/toast/Toast'
 import useTeamsStore from '../../stores/teamsStore'
 import useToastStore from '../../stores/toastStore'
+import SnackBar from '../../components/snackBar/SnackBar'
+import useSnackStore from '../../stores/snackStore';
 import ModalTeamUpsert from '../../components/modalTeamUpsert/ModalTeamUpsert';
 import { useState, useEffect } from 'react';
 import { Tooltip } from 'react-tooltip';
@@ -12,6 +14,7 @@ const Detail = () => {
     const navigate = useNavigate()
     const { name } = useParams();
     const {teams, setTeamCurrent, addTeamIsOpen, openAddTeam} = useTeamsStore(state => state)
+    const { getCurrentSnack } = useSnackStore(state => state)
     const { toast } = useToastStore(state => state)
     const [teamsCopy, setTeamsCopy] = useState([...teams])
     const [index, setIndex] = useState(0)
@@ -27,6 +30,7 @@ const Detail = () => {
     return (
         <div>
             <NavBar />
+            {getCurrentSnack().open && <SnackBar />}
             <div className={style.DisplayContainer}>
                 {toast && <Toast title="Éxito" message="Se guardó correctamente"  error={false} /> }
             {!addTeamIsOpen && <div className={style.Detail}>

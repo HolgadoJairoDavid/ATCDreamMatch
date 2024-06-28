@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from 'react'
 import style from './teams.module.css'
 import NavBar from '../../components/navBar/NavBar'
 import useTeamsStore from '../../stores/teamsStore'
@@ -15,11 +14,11 @@ const Teams = () => {
     const teams = useTeamsStore(state => state.teams)
     const {toast, showConfetti} = useToastStore(state => state)
     const {addTeamIsOpen, openAddTeam} = useTeamsStore(state => state)
-    const { snack } = useSnackStore(state => state)
+    const { getCurrentSnack } = useSnackStore(state => state)
     return (
         <div>
             <NavBar />
-            {snack?.open && <SnackBar />}
+            {getCurrentSnack().open && <SnackBar />}
             {showConfetti && <Confetti />}
             {toast && <Toast title="Éxito" message="Se guardó correctamente" error={false} /> }
             <div className={style.Teams}>
