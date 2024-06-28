@@ -34,6 +34,7 @@ const Teams = () => {
                     {!addTeamIsOpen && teams?.length < 2 && <button className={style.AddTeamButton} onClick={() => openAddTeam()} data-tooltip-id="tool-add-team" data-tooltip-content="Crear un equipo">Agregar Equipo</button> }
                     <Tooltip id="tool-add-team" place="bottom"/>
                 </div>
+                {teams?.length === 2 && <p>¡Felicidades! Tus equipos están listos</p>}
                 </div>}
                     {
                         addTeamIsOpen && <ModalTeamUpsert />
