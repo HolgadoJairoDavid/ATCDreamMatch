@@ -129,7 +129,8 @@ const ModalTeamUpsert = () => {
 
      
     return (
-        <div className={style.AddTeamModal}>
+        <div>
+                                <div className={style.AddTeamModal}>
                                 <div className={style.FormTeamModal}>
                                 <button className={style.CloseTeamButton} onClick={handleClickCloseModal}>Cerrar</button>
                                 <form>
@@ -206,8 +207,11 @@ const ModalTeamUpsert = () => {
                                             Siguiente
                                         </button>}
                                 </div>
+                                </div>
+                                <div className={style.SaveTeamContainer}>
                                 {messageError && messageError.players !== "" && countPlayersAdded !== 0 && <p className={style.MessageError}>{messageError.players}</p>}
-                                <button onClick={() => saveTeam()} disabled={getTeamCurrent().name === "" || getTeamCurrent().players?.length < 5 || messageError.name !== "" || messageError.players !== ""}>Guardar Equipo</button>
+                                <button onClick={() => saveTeam()} disabled={getTeamCurrent().name === "" || getTeamCurrent().players?.length < 5 || messageError.name !== "" || messageError.players !== ""} className={style.SaveTeam}>Guardar Equipo</button>
+                                </div>
                             </div>
                         
     )
