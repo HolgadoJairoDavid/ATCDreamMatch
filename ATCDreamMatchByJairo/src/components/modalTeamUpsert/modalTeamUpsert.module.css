@@ -357,3 +357,7 @@
 .SaveTeam:disabled:hover {
     transform: scale(.9);
 }
+
+.Searching p{
+    color: #e2e2e2;
+}

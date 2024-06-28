@@ -127,7 +127,7 @@ const ModalTeamUpsert = () => {
     }
 
     const disabledButtonAddPlayer = (player) => {
-        return getTeamCurrent().players?.some((p) => p.player_id === player.player_id) || getTeamCurrent().players.length === 5 || teams?.some((t) => t.players.some((p) => p.player_id === player.player_id))
+        return getTeamCurrent().players?.some((p) => p.player_id === player.player_id) || getTeamCurrent().players.length === 5 || teams?.some((t, index) => index !== getTeamCurrent().team_id && t.players.some((p) => p.player_id === player.player_id))
      }
 
      
@@ -168,12 +168,13 @@ const ModalTeamUpsert = () => {
                                    </div>
                                 </div>
                                 <div className={style.ContainerPlayers}>
-                                    {getCurrentLoading() && <p>Buscando...</p>}
+                                    {getCurrentLoading() && <div className={style.Searching}><p>Buscando...</p></div>}
                                     {!getCurrentLoading() && <div className={style.PlayersSearch}>
                                         {currentPlayers.length > 0 && currentPlayers.sort().slice(0, 10).map((player, index) => (
                                             <div key={index} className={style.PlayerCard}>
                                                 <div className={style.PlayerCardInfo}>
-                                                <button onClick={() => handleAddPlayer({...player})} value={player} disabled={disabledButtonAddPlayer(player)}>+</button>
+                                                <button onClick={() => handleAddPlayer({...player})} value={player} disabled={disabledButtonAddPlayer(player)} data-tooltip-id={`tool-add-player-${player.player_id}`} data-tooltip-content='No disponible'>+</button>
+                                                {teams?.some((t, index) => index !== getTeamCurrent().team_id && t.players.some((p) => p.player_id === player.player_id)) && <Tooltip id={`tool-add-player-${player.player_id}`}/>}
                                                 <h2>{player.player_name}</h2>
                                                 <p>{player.player_type}</p>
                                                 </div>
@@ -193,7 +194,7 @@ const ModalTeamUpsert = () => {
                                         ))}
                                     </div>
                                 </div>
-                                <div className={style.Pagination}>
+                                {!getCurrentLoading() && <div className={style.Pagination}>
                                         {<button onClick={() => setCurrentPage(currentPage - 1)} className={!(currentPage === 1) ? style.PrevButton : style.NoPrevButton}>
                                         Anterior
                                         </button>}
@@ -210,7 +211,7 @@ const ModalTeamUpsert = () => {
                                             {<button onClick={() => setCurrentPage(currentPage + 1)} className={!(indexOfLastPlayer >= playersFiltered.length) ? style.NextButton : style.NoNextButton}>
                                             Siguiente
                                         </button>}
-                                </div>
+                                </div>}
                                 </div>
                                 <div className={style.SaveTeamContainer}>
                                 {messageError && messageError.players !== "" && countPlayersAdded !== 0 && <p className={style.MessageError}>{messageError.players}</p>}
