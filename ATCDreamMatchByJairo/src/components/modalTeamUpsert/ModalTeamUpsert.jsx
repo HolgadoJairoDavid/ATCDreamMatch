@@ -92,6 +92,10 @@ const ModalTeamUpsert = () => {
             name: '',
             players: ''
         })
+        setTeamCurrent({
+            name: '',
+            players: []
+        })
         removeTeamCurrent()
     }
 
@@ -119,6 +123,10 @@ const ModalTeamUpsert = () => {
         setIsLoading(false)
         setToast(true)
         removeTeamCurrent()
+        setTeamCurrent({
+            name: '',
+            players: []
+        })
         setTimeout(() => {
             setToast(false)
             setShowConfetti(false)
