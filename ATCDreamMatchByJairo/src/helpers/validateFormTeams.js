@@ -4,15 +4,15 @@ const validateFormTeams = (team, teams, isCreateTeam) => {
         players: ''
     }
     if (!team.name.trim()) {
-        messageError.name = 'Name is required'
+        messageError.name = 'El equipo requiere un nombre'
     }
 
     if (isCreateTeam && teams.some((t) => t.name.toLowerCase().trim() === team.name.toLowerCase().trim())) {
-        messageError.name = 'Name already exists'
+        messageError.name = 'Este nombre ya existe'
     }
 
     if (team.players.length < 5) {
-        messageError.players = 'You need at least 5 players'
+        messageError.players = 'Se requiere al menos 5 jugadores'
     }
 
     return messageError

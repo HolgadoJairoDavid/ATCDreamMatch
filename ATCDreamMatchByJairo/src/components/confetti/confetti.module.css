@@ -1,4 +1,4 @@
 .ReactConfetti {
-    position: absolute;
+    position: fixed;
     top: 15vh;
 }

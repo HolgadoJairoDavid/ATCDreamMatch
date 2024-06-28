@@ -26,6 +26,7 @@ body {
   background-repeat: no-repeat;
   background-attachment: fixed;
   animation: backgroundAnimation 15s infinite;
+  overflow-x: hidden;
 }
 
 @keyframes backgroundAnimation {

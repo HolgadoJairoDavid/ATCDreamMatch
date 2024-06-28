@@ -102,7 +102,7 @@ const ModalTeamUpsert = () => {
         if (messageError.name !== '' || messageError.players !== '') {
             return
         }
-        if (teams.length < 2) {
+        if (teams.length === 1) {
             setShowConfetti(true)
         }
         upsertTeam(team)
@@ -198,12 +198,12 @@ const ModalTeamUpsert = () => {
                                         Anterior
                                         </button>}
                                         {[...Array(totalPages).keys()].map((pageNumber) => (
-                                        <button
+                                            playersFiltered.length > 10 && <button
                                             key={pageNumber + 1}
                                             onClick={() => setCurrentPage(pageNumber + 1)}
                                             disabled={currentPage === pageNumber + 1}
                                             className={style.PaginationButtonNumber}
-                                        >
+                                            >
                                             {pageNumber + 1}
                                         </button>
                                         ))}

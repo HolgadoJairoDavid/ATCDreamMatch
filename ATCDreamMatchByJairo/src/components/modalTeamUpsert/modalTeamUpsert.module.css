@@ -5,7 +5,7 @@
     align-items: center;
     justify-content: center;
     position: fixed;
-    padding-top: 6rem;
+    padding-top: 2rem;
     top: 20vh;
     left: 15vw;
     width: 70vw;
@@ -14,7 +14,7 @@
     z-index: 10000;
     overflow-x: hidden;
     overflow-y: scroll;
-    padding-bottom: 6rem;
+    padding-bottom: 2rem;
 }
 
 .AddTeamModal::-webkit-scrollbar {
@@ -210,14 +210,63 @@
     margin-top: 5rem;
 }
 
+.FormTeamModal input:focus {
+    outline: none;
+}
+
 .FiltersAndOrdered {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    padding: 1rem;
-    margin-bottom: 1rem;
+    padding-bottom: 3rem;
     width: 30%;
 }
+
+.FiltersAndOrdered select {
+    background-color: #f0f0f0; 
+    border: none;
+    padding: .4rem; 
+    font-size: .9rem; 
+    width: fit-content;
+    border-radius: 5px; 
+    appearance: none; 
+    -webkit-appearance: none; 
+  }
+
+.FiltersAndOrdered select:focus {
+    outline: none;
+}
+
+.FiltersAndOrdered select option {
+    background-color: #fff; 
+    color: #333;
+    padding: .5rem;
+  }
+
+.FiltersAndOrdered select option:checked {
+    background-color: #f57373;
+    color: #fff;
+  }
+
+.FiltersAndOrdered select option:disabled {
+    color: #9b9b9b;
+  }
+
+.FiltersAndOrdered select {
+    background-image: '\25BC'; 
+    background-repeat: no-repeat;
+    background-position: right center;
+    padding-right: 30px; 
+  }
+
+  .FiltersAndOrdered select::after {
+    content: '\25BC';
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    pointer-events: none; 
+  }
 
 .PlayerCardInfo {
     display: grid;
@@ -284,7 +333,7 @@
 .SaveTeamContainer p {
     padding-top: 0rem;
     color: red;
-    text-shadow: 0 0 5px #000000ca;
+    text-shadow: 7px 4px 7px #000000;
 }
 
 .SaveTeam {
