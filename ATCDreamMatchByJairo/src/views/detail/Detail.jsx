@@ -25,7 +25,8 @@ const Detail = () => {
     return (
         <div>
             <NavBar />
-            {toast && <Toast title="Éxito" message="Se guardó correctamente"  error={false} /> }
+            <div className={style.DisplayContainer}>
+                {toast && <Toast title="Éxito" message="Se guardó correctamente"  error={false} /> }
             {!addTeamIsOpen && <div className={style.Detail}>
                <div className={style.ButtonsDetail}>
                <NavLink to='/teams'> <button>Volver</button></NavLink> 
@@ -59,6 +60,7 @@ const Detail = () => {
             </div>
             }
              {addTeamIsOpen && <ModalTeamUpsert />}
+            </div>
 
         </div>
     );

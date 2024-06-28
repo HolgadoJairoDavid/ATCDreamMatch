@@ -83,6 +83,7 @@ const ModalTeamUpsert = () => {
         closeAddTeam()
         setCountPlayersAdded(0)
         removeAllPlayersSearch()
+        setCurrentPage(1)
         setFilterType('')
         setPlayersFiltered([])
         setIsLoading(false)
@@ -105,6 +106,7 @@ const ModalTeamUpsert = () => {
         }
         upsertTeam(team)
         closeAddTeam()
+        setCurrentPage(1)
         removeAllPlayersSearch()
         setCountPlayersAdded(0)
         setFilterType('')
