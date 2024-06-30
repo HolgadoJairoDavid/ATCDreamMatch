@@ -4,6 +4,7 @@
     position: fixed;
     box-shadow: -1rem 0rem 4rem rgba(0, 0, 0, .5);
     height: 5rem;
+    z-index: 10000000000000000;
 }
 .navBarDisplay {
     display: grid;

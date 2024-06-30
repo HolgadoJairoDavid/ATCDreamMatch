@@ -28,7 +28,7 @@ const Detail = () => {
         setTeamsCopy([...teams])
     }, [addTeamIsOpen, navigate])
     return (
-        <div>
+        <div className={style.ViewDetail}>
             <NavBar />
             {getCurrentSnack().open && <SnackBar />}
             <div className={style.DisplayContainer}>
@@ -46,7 +46,7 @@ const Detail = () => {
                     teamsCopy?.map((team) => {
                         if (team.name === name) {
                             return (
-                                <div key={team.name}>
+                                <div key={team.name} className={style.DetailTeam}>
                                     <div className={style.SectionPlayersAndType}>
                                         <h3>Jugadores</h3>
                                         <h3>Roles</h3>
