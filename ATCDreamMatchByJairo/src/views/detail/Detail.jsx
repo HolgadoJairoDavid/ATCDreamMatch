@@ -20,12 +20,14 @@ const Detail = () => {
     const [index, setIndex] = useState(0)
     const handleEditTeam = () => {
         setIndex(teams.findIndex((team) => team.name === name))
-        setTeamCurrent({...teams[index], team_id: index})
+        setTeamCurrent({...teams[teams.findIndex((team) => team.name === name)], team_id: teams.findIndex((team) => team.name === name)})
         openAddTeam()
     }
     useEffect(() => {
-        navigate(`/detail/${teams[index]?.name}`)
         setTeamsCopy([...teams])
+        if (!teams.some((team) => team.name === name)) {
+        navigate(`/detail/${teams[index]?.name}`)
+        }
     }, [addTeamIsOpen, navigate])
     return (
         <div className={style.ViewDetail}>

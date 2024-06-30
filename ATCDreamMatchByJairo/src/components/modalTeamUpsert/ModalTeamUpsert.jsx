@@ -86,7 +86,7 @@ const ModalTeamUpsert = () => {
         removeAllPlayersSearch()
         setCurrentPage(1)
         setFilterType('')
-        setPlayersFiltered([])
+        setPlayersFiltered("NONE")
         setIsLoading(false)
         setMessageError({
             name: '',
@@ -115,7 +115,7 @@ const ModalTeamUpsert = () => {
         removeAllPlayersSearch()
         setCountPlayersAdded(0)
         setFilterType('')
-        setPlayersFiltered([])
+        setPlayersFiltered("NONE")
         setMessageError({
             name: '',
             players: ''

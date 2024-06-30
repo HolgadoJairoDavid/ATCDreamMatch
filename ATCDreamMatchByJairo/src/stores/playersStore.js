@@ -23,6 +23,11 @@ const usePlayersStore = create(persist(
                 set({ playersFiltered: get().players });
                 return;
             }
+
+            if (value === "NONE") {
+                set({ playersFiltered: [], filterType: '', orderBy: '', players: []});
+                return;
+            }
     
             const typeFilters = {
                 Goalkeepers: 'Goalkeepers',
