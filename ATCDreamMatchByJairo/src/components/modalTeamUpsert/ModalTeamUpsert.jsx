@@ -140,7 +140,7 @@ const ModalTeamUpsert = () => {
 
      
     return (
-        <div>
+        <div className={style.ModalTeamUpsert}>
                                 <div className={style.AddTeamModal}>
                                 <div className={style.FormTeamModal}>
                                 <button className={style.CloseTeamButton} onClick={handleClickCloseModal} data-tooltip-id="tool-close" data-tooltip-content="Volver">Cerrar</button>
@@ -176,50 +176,52 @@ const ModalTeamUpsert = () => {
                                    </div>
                                 </div>
                                 <div className={style.ContainerPlayers}>
+                                    <div>
                                     {getCurrentLoading() && <div className={style.Searching}><p>Buscando...</p></div>}
                                     {!getCurrentLoading() && <div className={style.PlayersSearch}>
                                         {currentPlayers.length > 0 && currentPlayers.sort().slice(0, 10).map((player, index) => (
                                             <div key={index} className={style.PlayerCard}>
                                                 <div className={style.PlayerCardInfo}>
-                                                <button onClick={() => handleAddPlayer({...player})} value={player} disabled={disabledButtonAddPlayer(player)} data-tooltip-id={`tool-add-player-${player.player_id}`} data-tooltip-content='No disponible'>+</button>
-                                                {teams?.some((t, index) => index !== getTeamCurrent().team_id && t.players.some((p) => p.player_id === player.player_id)) && <Tooltip id={`tool-add-player-${player.player_id}`}/>}
                                                 <h2>{player.player_name}</h2>
                                                 <p>{player.player_type}</p>
                                                 </div>
+                                                <button onClick={() => handleAddPlayer({...player})} value={player} disabled={disabledButtonAddPlayer(player)} data-tooltip-id={`tool-add-player-${player.player_id}`} data-tooltip-content='No disponible'>+</button>
+                                                {teams?.some((t, index) => index !== getTeamCurrent().team_id && t.players.some((p) => p.player_id === player.player_id)) && <Tooltip id={`tool-add-player-${player.player_id}`}/>}
                                             </div>
                                         ))}
                                         
                                 </div>}
+                                        {!getCurrentLoading() && <div className={style.Pagination}>
+                                                {<button onClick={() => setCurrentPage(currentPage - 1)} className={!(currentPage === 1) ? style.PrevButton : style.NoPrevButton}>
+                                                Anterior
+                                                </button>}
+                                                {[...Array(totalPages).keys()].map((pageNumber) => (
+                                                    playersFiltered.length > 10 && <button
+                                                    key={pageNumber + 1}
+                                                    onClick={() => setCurrentPage(pageNumber + 1)}
+                                                    disabled={currentPage === pageNumber + 1}
+                                                    className={style.PaginationButtonNumber}
+                                                    >
+                                                    {pageNumber + 1}
+                                                </button>
+                                                ))}
+                                                    {<button onClick={() => setCurrentPage(currentPage + 1)} className={!(indexOfLastPlayer >= playersFiltered.length) ? style.NextButton : style.NoNextButton}>
+                                                    Siguiente
+                                                </button>}
+                                        </div>}
+                                    </div>
                                     <div className={style.PlayersAdded}>
                                         {getTeamCurrent().players?.length > 0 && getTeamCurrent().players?.map((player, index) => (
                                             <div key={index} className={style.PlayerCard}>
                                                 <div className={style.PlayerCardInfo}>
-                                                <button onClick={() => handleRemovePlayer({...player})} value={player}>-</button>
                                                 <h2>{player.player_name}</h2>
                                                 <p>{player.player_type}</p>
                                                 </div>
+                                                <button onClick={() => handleRemovePlayer({...player})} value={player}>-</button>
                                             </div>
                                         ))}
                                     </div>
                                 </div>
-                                {!getCurrentLoading() && <div className={style.Pagination}>
-                                        {<button onClick={() => setCurrentPage(currentPage - 1)} className={!(currentPage === 1) ? style.PrevButton : style.NoPrevButton}>
-                                        Anterior
-                                        </button>}
-                                        {[...Array(totalPages).keys()].map((pageNumber) => (
-                                            playersFiltered.length > 10 && <button
-                                            key={pageNumber + 1}
-                                            onClick={() => setCurrentPage(pageNumber + 1)}
-                                            disabled={currentPage === pageNumber + 1}
-                                            className={style.PaginationButtonNumber}
-                                            >
-                                            {pageNumber + 1}
-                                        </button>
-                                        ))}
-                                            {<button onClick={() => setCurrentPage(currentPage + 1)} className={!(indexOfLastPlayer >= playersFiltered.length) ? style.NextButton : style.NoNextButton}>
-                                            Siguiente
-                                        </button>}
-                                </div>}
                                 </div>
                                 <div className={style.SaveTeamContainer}>
                                 {messageError && messageError.players !== "" && countPlayersAdded !== 0 && <p className={style.MessageError}>{messageError.players}</p>}

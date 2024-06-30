@@ -1,11 +1,21 @@
+.ModalTeamUpsert {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    top: 0;
+    left: 0;
+    padding-top: 2.5rem;
+    width: 100vw;
+    height: 100vh;
+}
+
 .AddTeamModal {
     display: flex;
     flex-direction: column;
     border-radius: 30px;
     align-items: center;
     justify-content: center;
-    position: fixed;
-    padding-top: 2rem;
     top: 20vh;
     left: 15vw;
     width: 70vw;
@@ -14,7 +24,9 @@
     z-index: 10000;
     overflow-x: hidden;
     overflow-y: scroll;
-    padding-bottom: 2rem;
+    /* padding-top: 7rem; */
+    padding-left: .5rem;
+    padding-right: .5rem;
 }
 
 .AddTeamModal::-webkit-scrollbar {
@@ -41,8 +53,6 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 80%;
-    height: 80%;
 }
 
 .AddTeamModal input {
@@ -62,7 +72,6 @@
 }
 
 .AddTeamModal p {
-    position: relative;
     font-size: 1rem;
     color: red;
     font-weight: bold;
@@ -70,14 +79,13 @@
 }
 
 .CloseTeamButton {
-    position: absolute;
     top: 1rem;
-    right: 1rem;
     padding: 0.5rem;
     background-color: #f57373;
     border: 1px solid #dd6161;
     border-radius: 20px;
     cursor: pointer;
+    border-radius: 35px;
 }
 
 .ContainerPlayers {
@@ -89,8 +97,6 @@
 
 .PlayersSearch {
     width: fit-content;
-    padding-left: 1rem;
-    padding-right: 1rem;
     overflow: auto;
     height: 22rem;
 }
@@ -114,7 +120,10 @@
   }
 
 .PlayerCard {
-    display: grid;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
     font-size: .6rem;
     height: 4rem;
     grid-template-rows: 1fr 1fr;
@@ -126,13 +135,17 @@
 }
 
 .PlayerCard h2 {
-    margin-top: -8rem;
+    margin: 0rem;
+    padding: 0rem 0rem 0rem 1rem;
+    text-align: center;
+
 }
 
 .PlayerCard p {
     color: #000;
+    margin: 0rem;
+    padding: 0rem;
     font-size: .6rem;
-    margin-top: -14rem;
 }
 
 .PlayerCard button {
@@ -146,8 +159,10 @@
     border: none;
     border-radius: 100%;
     cursor: pointer;
-    margin-bottom: 3rem;
-    margin-left: 19rem;
+    margin: 0rem;
+    margin-left: 0rem;
+    align-self: center;
+    justify-self: center;
 }
 
 .PlayerCard button:hover {
@@ -167,15 +182,10 @@
 }
 
 .PlayersAdded {
-    grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
-    align-items: center;
-    padding-bottom: .5rem;
-    padding-left: 1rem;
-    padding-right: 1rem;
     overflow: auto;
     width: fit-content;
     height: 22rem;
-    margin-bottom: .5rem;
+    margin-bottom: 2rem;
 }
 
 .PlayersAdded::-webkit-scrollbar {
@@ -199,15 +209,6 @@
 .FormTeamModal {
     width: 100%;
     margin-left: 15%;
-    margin-top: 20%;
-}
-
-.FormTeamModal button {
-    padding: 0.5rem;
-    background-color: #ee7d7d;
-    border: 1px solid #e47e7e;
-    border-radius: 35px;
-    margin-top: 5rem;
 }
 
 .FormTeamModal input:focus {
@@ -218,8 +219,8 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
-    padding-bottom: 3rem;
     width: 30%;
+    padding-bottom: 1rem;
 }
 
 .FiltersAndOrdered select {
@@ -255,28 +256,24 @@
 .FiltersAndOrdered select {
     background-image: '\25BC'; 
     background-repeat: no-repeat;
-    background-position: right center;
     padding-right: 30px; 
   }
 
   .FiltersAndOrdered select::after {
     content: '\25BC';
-    position: absolute;
-    top: 50%;
     right: 10px;
     transform: translateY(-50%);
     pointer-events: none; 
   }
 
 .PlayerCardInfo {
-    display: grid;
+    /* display: grid;
     grid-template-rows: 1fr 1fr;
     width: 100%;
-    text-align: center;
+    text-align: center; */
 }
 
 .MessageError {
-    position: relative;
     font-size: 1rem;
     color: #ff4f4f;
     font-weight: bold;
@@ -285,10 +282,12 @@
 
 .Pagination {
     width: 100%;
+    display: flex;
+    justify-content: space-around;
 }
 
 .Pagination button {
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
     margin-left: .5rem;
     margin-right: .5rem;
     font-size: .7rem;
@@ -360,4 +359,274 @@
 
 .Searching p{
     color: #e2e2e2;
+}
+
+@media (max-width: 500px) {
+    .AddTeamModal {
+        width: 90vw;
+        height: 80vh;
+        left: 0;
+    }
+
+    .AddTeamModal form {
+        width: 100%;
+        height: 100%;
+    }
+
+    .ContainerPlayers {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .PlayerCard {
+        margin-top: .5rem;
+    }
+
+    .PlayersSearch {
+        width: 100%;
+        height: 15rem;
+    }
+
+    .PlayersAdded {
+        width: 100%;
+        height: 15rem;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .FormTeamModal {
+        margin-left: 0;
+        margin-top: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: end;
+    }
+
+    .FiltersAndOrdered {
+        width: 100%;
+    }
+
+    .FiltersAndOrdered select {
+        width: 100%;
+        font-size: .7rem;
+    }
+
+    .Pagination {
+        width: 100%;
+    }
+
+    .Pagination button {
+        margin-bottom: 1rem;
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .SaveTeamContainer {
+        margin-top: 0;
+    }
+
+    .CloseTeamButton {
+        margin-top: 19rem;
+        margin-bottom: 1rem;
+    }
+}
+
+@media (max-width: 800px) {
+    .AddTeamModal {
+        width: 90vw;
+        height: 80vh;
+        left: 0;
+    }
+
+    .AddTeamModal form {
+        width: 100%;
+        height: 100%;
+    }
+
+    .ContainerPlayers {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .PlayersSearch {
+        width: 100%;
+        height: 15rem;
+    }
+
+    .PlayersAdded {
+        width: 100%;
+        height: 15rem;
+    }
+
+    .FormTeamModal {
+        margin-left: 0;
+        margin-top: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: end;
+    }
+
+    .FiltersAndOrdered {
+        width: 100%;
+    }
+
+    .FiltersAndOrdered select {
+        width: 100%;
+    }
+
+    .Pagination {
+        width: 100%;
+    }
+
+    .Pagination button {
+        margin-bottom: 1rem;
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .SaveTeamContainer {
+        margin-top: 0;
+    }
+
+    .SaveTeam {
+        width: 100%;
+    }
+
+    .CloseTeamButton {
+        margin-bottom: 1rem;
+    }
+}
+
+@media (max-width: 1000px) {
+    .AddTeamModal {
+        width: 90vw;
+        height: 80vh;
+        left: 0;
+    }
+
+    .AddTeamModal form {
+        width: 100%;
+        height: 100%;
+    }
+
+    .ContainerPlayers {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .PlayersSearch {
+        width: 100%;
+        height: 15rem;
+    }
+
+    .PlayersAdded {
+        width: 100%;
+        height: 15rem;
+    }
+
+    .FormTeamModal {
+        margin-left: 0;
+        margin-top: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: end;
+    }
+
+    .FiltersAndOrdered {
+        width: 100%;
+    }
+
+    .FiltersAndOrdered select {
+        width: 100%;
+    }
+
+    .Pagination {
+        width: 100%;
+    }
+
+    .Pagination button {
+        margin-bottom: 1rem;
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .SaveTeamContainer {
+        margin-top: 0;
+    }
+
+    .SaveTeam {
+        width: 100%;
+    }
+
+    .CloseTeamButton {
+        margin-bottom: 1rem;
+    }
+}
+
+@media (min-width: 1000px){
+    .AddTeamModal {
+        width: 60vw;
+        height: 70vh;
+        left: 0;
+    }
+
+    .AddTeamModal form {
+        width: 100%;
+        height: 100%;
+    }
+
+    .ContainerPlayers {
+        display: grid;
+        grid-column-gap: 1rem;
+    }
+
+    .PlayersSearch {
+        width: 100%;
+        height: 15rem;
+    }
+
+    .PlayersAdded {
+        width: 100%;
+        height: 15rem;
+    }
+
+    .FormTeamModal {
+        margin-left: 0;
+        margin-top: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: end;
+    }
+
+    .FiltersAndOrdered {
+        width: 50%;
+        align-self: start;
+    }
+
+    .FiltersAndOrdered select {
+        width: 100%;
+    }
+
+    .Pagination {
+        width: 100%;
+    }
+
+    .Pagination button {
+        margin-bottom: 1rem;
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .SaveTeamContainer {
+        margin-top: 0;
+    }
+
+    .SaveTeam {
+        width: 100%;
+    }
+
+    .CloseTeamButton {
+        margin-bottom: 1rem;
+        margin-top: 6rem;
+    }
 }
